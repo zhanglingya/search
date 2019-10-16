@@ -1,0 +1,113 @@
+.header {
+  background-color: #478de9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.header .nav-left {
+  color: #ffffff;
+  font-size: 20px;
+}
+.header .picture {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #97cd74;
+  border-radius: 50%;
+  right: 90px;
+}
+.header .name {
+  color: #ffffff;
+  font-size: 15px;
+}
+.sider {
+  background-color: #ffffff;
+}
+.sider li {
+  width: 200px;
+}
+.content {
+  background-color: #ffffff;
+}
+.content .text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px 0 0 0;
+}
+.content .text .input {
+  width: 40%;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #6f6f6f;
+  padding-left: 30px;
+}
+.content .text .add {
+  width: 60px;
+  height: 32px;
+  margin: 0 10px;
+}
+.content .text .select {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+}
+.content .text .choice {
+  display: flex;
+  width: 200px;
+  justify-content: space-around;
+}
+.content .text .choice .type {
+  font-size: 15px;
+  color: black;
+}
+.content .text .choice a :hover {
+  color: bisque;
+}
+.content .text ::-webkit-input-placeholder {
+  font-size: 20px;
+  color: #c8c8c8;
+  font-weight: 100;
+}
+.content .message {
+  display: flex;
+  width: 1100px;
+  height: 500px;
+  background-color: #f0f0f0;
+  margin: 10px 0 0 40px;
+  border-radius: 10px;
+  position: relative;
+}
+.content .message #list .type-comedy {
+  position: absolute;
+  left: 100px;
+}
+.content .message #list .type-action {
+  position: absolute;
+  left: 450px;
+}
+.content .message #list .type-crux {
+  position: absolute;
+  left: 800px;
+}
+.content .message #list p {
+  font-size: 23px;
+  font-weight: bold;
+  color: black;
+  margin: 10px 0;
+}
+.content .message #list li {
+  list-style: none;
+  font-size: 18px;
+  margin: 15px 0;
+  padding: 10px 20px;
+  width: 200px;
+  height: 50px;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+.ivu-menu-light:after {
+  height: 0px !important;
+}
