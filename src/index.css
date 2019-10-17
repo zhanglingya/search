@@ -1,3 +1,6 @@
+.containter {
+  font-family: Arial, Helvetica, sans-serif;
+}
 .header {
   background-color: #478de9;
   display: flex;
@@ -30,6 +33,11 @@
 .content {
   background-color: #ffffff;
 }
+.content .title {
+  font-size: 50px;
+  text-align: center;
+  margin: 50px 0 -50px 0;
+}
 .content .text {
   display: flex;
   justify-content: center;
@@ -41,6 +49,7 @@
   height: 50px;
   border-radius: 10px;
   border: 1px solid #6f6f6f;
+  outline: none;
   padding-left: 30px;
 }
 .content .text .add {

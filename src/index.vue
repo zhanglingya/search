@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div class="containter">
     <Layout>
       <Header class="header">
         <p class="nav-left">{{title}}</p>
@@ -29,6 +29,7 @@
         </Sider>
         <Layout>
           <Content class="content">
+            <p class="title">todos</p>
             <div class="text">
               <input
                 type="text"
@@ -39,12 +40,12 @@
                 autocomplete="off"
               />
               <RadioGroup v-model="sc" class="choice">
-                <Radio label="comedy" class="type" id="film">comedy</Radio>
+                <Radio label="comedy" class="type">comedy</Radio>
                 <Radio label="action" class="type">action</Radio>
                 <Radio label="crux" class="type">crux</Radio>
               </RadioGroup>
               <Button type="default" class="add" id="add" @click="addClick">add</Button>
-              <Select v-model="model1" class="select" id="sel" @on-change="choose">
+              <Select v-model="form" class="select" id="sel" @on-change="choose">
                 <Option
                   v-for="item in filmList"
                   :value="item.value"
@@ -138,7 +139,7 @@ export default {
       }
     },
     choose: function() {
-      switch (this.model1) {
+      switch (this.form) {
         case "comedy":
           document.getElementById("happy").style.display = "block";
           document.getElementById("fast").style.display = "none";
@@ -160,7 +161,7 @@ export default {
   data() {
     return {
       sc: "",
-      model1: "comedy",
+       form: "action",
       filmList: [
         {
           value: "comedy",
