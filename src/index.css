@@ -32,13 +32,15 @@
 }
 .content {
   background-color: #ffffff;
+  text-align: center;
 }
 .content .title {
+  max-width: 1280px;
   font-size: 50px;
-  text-align: center;
   margin: 50px 0 -50px 0;
 }
 .content .text {
+  max-width: 1280px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,8 +62,6 @@
 .content .text .select {
   width: 100px;
   height: 30px;
-  text-align: center;
-  vertical-align: middle;
 }
 .content .text .choice {
   display: flex;
@@ -81,37 +81,39 @@
   font-weight: 100;
 }
 .content .message {
-  display: flex;
-  width: 1100px;
+  max-width: 1280px;
   height: 500px;
   background-color: #f0f0f0;
   margin: 10px 0 0 40px;
   border-radius: 10px;
   position: relative;
 }
-.content .message #list .type-comedy {
+.content .message #list .col-comedy {
   position: absolute;
-  left: 100px;
+  left: 150px;
 }
-.content .message #list .type-action {
+.content .message #list .col-action {
   position: absolute;
   left: 450px;
 }
-.content .message #list .type-crux {
+.content .message #list .col-crux {
   position: absolute;
-  left: 800px;
+  left: 750px;
 }
-.content .message #list p {
+.content .message #list .col {
   font-size: 23px;
   font-weight: bold;
   color: black;
   margin: 10px 0;
 }
+.content .message #list ul {
+  margin: 60px 0;
+}
 .content .message #list li {
   list-style: none;
   font-size: 18px;
-  margin: 15px 0;
-  padding: 10px 30px;
+  margin: 10px 0 0 -60px;
+  padding: 10px 0;
   width: 200px;
   height: 50px;
   background-color: #ffffff;
@@ -126,7 +128,7 @@
 .content .message #list li p {
   position: absolute;
   left: 170px;
-  top: -4px;
+  top: 10px;
   cursor: pointer;
 }
 .ivu-menu-light:after {

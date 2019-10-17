@@ -54,20 +54,20 @@
               </Select>
             </div>
             <div class="message">
-              <section id="list">
-                <div class="type-comedy">
-                  <p>comedy</p>
+              <Row type="flex" id="list">
+                <div class="col-comedy">
+                  <i-col span="4" class="col">comedy</i-col>
                   <ul id="happy"></ul>
                 </div>
-                <div class="type-action">
-                  <p>action</p>
+                <div class="col-action">
+                  <i-col span="4" class="col">action</i-col>
                   <ul id="fast"></ul>
                 </div>
-                <div class="type-crux">
-                  <p>crux play</p>
+                <div class="col-crux">
+                  <i-col span="4" class="col">crux</i-col>
                   <ul id="scared"></ul>
                 </div>
-              </section>
+              </Row>
             </div>
           </Content>
         </Layout>
@@ -100,8 +100,10 @@ export default {
   },
   methods: {
     addClick: function() {
-      var text = document.getElementById("text");
-      if (text.value == "" || text.value == null) {
+      var text = document.getElementById("text").value;
+      var patt = /^[\s]*$/;
+      var pvalue = patt.test(text);
+      if (text == "" || text == null || pvalue == true) {
         return false;
       } else {
         //添加li标签
@@ -119,7 +121,7 @@ export default {
             break;
         }
 
-        line.innerHTML = text.value;
+        line.innerHTML = text;
         list.appendChild(line);
 
         //往新的li标签添加复选框
@@ -150,7 +152,7 @@ export default {
           document.getElementById("happy").style.display = "none";
           document.getElementById("scared").style.display = "none";
           break;
-        case "crux play":
+        case "crux":
           document.getElementById("scared").style.display = "block";
           document.getElementById("happy").style.display = "none";
           document.getElementById("fast").style.display = "none";
@@ -161,7 +163,7 @@ export default {
   data() {
     return {
       sc: "",
-       form: "action",
+      form: "action",
       filmList: [
         {
           value: "comedy",
@@ -172,8 +174,8 @@ export default {
           label: "action"
         },
         {
-          value: "crux play",
-          label: "crux play"
+          value: "crux",
+          label: "crux"
         }
       ]
     };
