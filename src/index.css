@@ -56,7 +56,7 @@
 }
 .content .text .choice {
   display: flex;
-  width: 200px;
+  width: 250px;
   justify-content: space-around;
 }
 .content .text .choice .type {
@@ -64,7 +64,7 @@
   color: black;
 }
 .content .text .choice a :hover {
-  color: bisque;
+  color: #baec2f;
 }
 .content .text ::-webkit-input-placeholder {
   font-size: 20px;
@@ -102,11 +102,23 @@
   list-style: none;
   font-size: 18px;
   margin: 15px 0;
-  padding: 10px 20px;
+  padding: 10px 30px;
   width: 200px;
   height: 50px;
   background-color: #ffffff;
   border-radius: 8px;
+  position: relative;
+}
+.content .message #list li input {
+  position: absolute;
+  left: 5px;
+  top: 16px;
+}
+.content .message #list li p {
+  position: absolute;
+  left: 170px;
+  top: -4px;
+  cursor: pointer;
 }
 .ivu-menu-light:after {
   height: 0px !important;

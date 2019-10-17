@@ -54,14 +54,14 @@
     }
     .choice {
       display: flex;
-      width: 200px;
+      width: 250px;
       justify-content: space-around;
       .type {
         font-size: 15px;
         color: black;
       }
       a :hover {
-        color: bisque;
+        color: rgb(186, 236, 47);
       }
     }
     ::-webkit-input-placeholder {
@@ -102,12 +102,23 @@
           list-style: none;
           font-size: 18px;
           margin: 15px 0;
-          padding: 10px 20px;
+          padding: 10px 30px;
           width: 200px;
           height: 50px;
           background-color: #ffffff;
           border-radius: 8px;
-         
+          position: relative;
+          input{
+            position: absolute;
+            left:5px;
+            top:16px;
+          }
+          p{
+            position: absolute;
+            left: 170px;
+            top:-4px;
+            cursor: pointer;
+          }
         }
       
     }

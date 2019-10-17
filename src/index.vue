@@ -38,40 +38,34 @@
                 id="text"
                 autocomplete="off"
               />
-              <div class="choice">
-                <a>
-                  <p class="type" id="film" @click="one">comedy</p>
-                </a>
-                <a>
-                  <p class="type" id="film" @click="two">action</p>
-                </a>
-                <a>
-                  <p class="type" id="film" @click="three">crux play</p>
-                </a>
-              </div>
+              <RadioGroup v-model="sc" class="choice">
+                <Radio label="comedy" class="type" id="film">comedy</Radio>
+                <Radio label="action" class="type">action</Radio>
+                <Radio label="crux" class="type">crux</Radio>
+              </RadioGroup>
               <Button type="default" class="add" id="add" @click="addClick">add</Button>
-              <Select v-model="model" class="select" id="select">
+              <Select v-model="model1" class="select" id="sel" @on-change="choose">
                 <Option
                   v-for="item in filmList"
                   :value="item.value"
-                  @click="choose"
+                  :key="item.value"
                 >{{ item.label }}</Option>
               </Select>
             </div>
             <div class="message">
               <section id="list">
-                  <div class="type-comedy">
-                    <p>comedy</p>
-                    <ul id="happy"></ul>
-                  </div>
-                  <div class="type-action">
-                    <p>action</p>
-                    <ul id="fast"></ul>
-                  </div>
-                  <div class="type-crux">
-                    <p>crux play</p>
-                    <ul id="scared"></ul>
-                  </div>
+                <div class="type-comedy">
+                  <p>comedy</p>
+                  <ul id="happy"></ul>
+                </div>
+                <div class="type-action">
+                  <p>action</p>
+                  <ul id="fast"></ul>
+                </div>
+                <div class="type-crux">
+                  <p>crux play</p>
+                  <ul id="scared"></ul>
+                </div>
               </section>
             </div>
           </Content>
@@ -101,68 +95,72 @@ export default {
     },
     secondTwo: {
       default: "角色管理"
-    },
-    methods: {
-      addclick: function() {
-        add();
-      }
     }
   },
   methods: {
-    one: function() {
-      document.getElementById("film").value = "comedy";
-    },
-    two: function() {
-      document.getElementById("film").value = "action";
-    },
-    three: function() {
-      document.getElementById("film").value = "crux";
-    },
     addClick: function() {
       var text = document.getElementById("text");
-      var film = document.getElementById("film");
       if (text.value == "" || text.value == null) {
         return false;
       } else {
         //添加li标签
-        var line = document.createElement("li"); 
-        if(film.value =="" || film.value ==null){
-          return false;
+        var line = document.createElement("li");
+
+        switch (this.sc) {
+          case "comedy":
+            var list = document.getElementById("happy");
+            break;
+          case "action":
+            list = document.getElementById("fast");
+            break;
+          case "crux":
+            list = document.getElementById("scared");
+            break;
         }
-        switch (film.value) {
-          case 'comedy':
-          var ul = document.getElementById("happy"); 
-          document.getElementById("film").value = "";
-          break;
-          case 'action':
-          var ul = document.getElementById("fast");
-          document.getElementById("film").value = "";
-          break;
-          case 'crux':
-          var ul = document.getElementById("scared");
-          document.getElementById("film").value = "";
-          break;
-        }
-        
+
         line.innerHTML = text.value;
-        ul.appendChild(line);
+        list.appendChild(line);
 
         //往新的li标签添加复选框
         var input = document.createElement("input");
         input.type = "checkbox";
-        ul.lastChild.appendChild(input);
+        list.lastChild.appendChild(input);
+
+        //添加删除按钮
+        var butt = document.createElement("p");
+        butt.appendChild(document.createTextNode("x"));
+        list.lastChild.appendChild(butt);
+        butt.onclick = function() {
+          butt.parentNode.parentNode.removeChild(butt.parentNode);
+        };
 
         document.getElementById("text").value = "";
       }
     },
-    choose:function(){
-      if(item.value == "comedy"){
-        document.getElementById('fast').style.display = 'none';
+    choose: function() {
+      switch (this.model1) {
+        case "comedy":
+          document.getElementById("happy").style.display = "block";
+          document.getElementById("fast").style.display = "none";
+          document.getElementById("scared").style.display = "none";
+          break;
+        case "action":
+          document.getElementById("fast").style.display = "block";
+          document.getElementById("happy").style.display = "none";
+          document.getElementById("scared").style.display = "none";
+          break;
+        case "crux play":
+          document.getElementById("scared").style.display = "block";
+          document.getElementById("happy").style.display = "none";
+          document.getElementById("fast").style.display = "none";
+          break;
       }
     }
   },
   data() {
     return {
+      sc: "",
+      model1: "comedy",
       filmList: [
         {
           value: "comedy",
@@ -176,8 +174,7 @@ export default {
           value: "crux play",
           label: "crux play"
         }
-      ],
-      model: "comedy"
+      ]
     };
   }
 };
