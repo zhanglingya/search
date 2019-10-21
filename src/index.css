@@ -33,22 +33,29 @@
 .content {
   background-color: #ffffff;
   text-align: center;
+  width: 100%;
 }
 .content .title {
-  max-width: 1280px;
   font-size: 50px;
   margin: 50px 0 -50px 0;
 }
 .content .text {
-  max-width: 1280px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin: 100px 0 0 0;
+  margin: 100px 20px 0 20px;
+}
+.content .text .ivu-radio-group {
+  width: 600px;
+}
+.content .text .ivu-select {
+  width: 180px;
 }
 .content .text .select {
   width: 180px;
   height: 30px;
+}
+.content .text button {
+  margin: 10px;
 }
 .content .text .choice {
   display: flex;
@@ -67,56 +74,9 @@
   color: #c8c8c8;
   font-weight: 100;
 }
-.content .message {
-  max-width: 1280px;
-  height: 500px;
-  background-color: #f0f0f0;
-  margin: 10px 0 0 40px;
-  border-radius: 10px;
-  position: relative;
-}
-.content .message #list .col-comedy {
-  position: absolute;
-  left: 150px;
-}
-.content .message #list .col-action {
-  position: absolute;
-  left: 450px;
-}
-.content .message #list .col-crux {
-  position: absolute;
-  left: 750px;
-}
-.content .message #list .col {
-  font-size: 23px;
-  font-weight: bold;
-  color: black;
-  margin: 10px 0;
-}
-.content .message #list ul {
-  margin: 60px 0;
-}
-.content .message #list li {
-  list-style: none;
+.content .ivu-checkbox-wrapper {
   font-size: 18px;
-  margin: 10px 0 0 -60px;
-  padding: 10px 0;
-  width: 200px;
-  height: 50px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  position: relative;
-}
-.content .message #list li input {
-  position: absolute;
-  left: 5px;
-  top: 16px;
-}
-.content .message #list li p {
-  position: absolute;
-  left: 170px;
-  top: 10px;
-  cursor: pointer;
+  color: black;
 }
 .ivu-menu-light:after {
   height: 0px !important;

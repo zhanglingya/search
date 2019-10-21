@@ -27,6 +27,7 @@
         <Layout>
           <Content class="content">
             <p class="title">todos</p>
+
             <div class="text">
               <Input
                 v-model="formData.content"
@@ -40,10 +41,9 @@
                   :label="type.value"
                 >{{ type.label }}</Radio>
               </RadioGroup>
-
               <Button type="default" @click="addClick">add</Button>
 
-              <Select v-model="form" class="select" id="sel" @on-change="choose">
+              <Select v-model="form" @on-change="choose">
                 <Option
                   v-for="item in filmList"
                   :value="item.value"
@@ -56,21 +56,21 @@
               <i-col span="8">
                 <h1>comedy</h1>
                 <div v-for="(item, index) in type0List" :key="index">
-                  <Checkbox v-model="checked" :label ="item.content">{{ item.content }}</Checkbox>
+                  <Checkbox name="formData.checked" value="item.content">{{ item.content }}</Checkbox>
                 </div>
               </i-col>
 
               <i-col span="8">
                 <h1>action</h1>
                 <div v-for="(item, index) in type1List" :key="index">
-                  <Checkbox v-model="checked" :label ="item.content">{{ item.content }}</Checkbox>
+                  <Checkbox name="formData.checked" value="item.content">{{ item.content }}</Checkbox>
                 </div>
               </i-col>
 
               <i-col span="8">
                 <h1>crux</h1>
                 <div v-for="(item, index) in type2List" :key="index">
-                  <Checkbox v-model="checked" :label ="item.content">{{ item.content }}</Checkbox>
+                  <Checkbox name="formData.checked" value="item.content">{{ item.content }}</Checkbox>
                 </div>
               </i-col>
             </Row>
@@ -104,13 +104,15 @@ export default {
     },
     choose: function() {
       if (this.form == "Incomplete Tasks") {
+        var index = 0;
         console.log(this.formData.checked);
+
         console.log(
-          this.resultList.filter(function(item) {
-            return item.checked === true;
+          this.resultList.filter(function(item,index,checked) {
+            return (index >= 0)
           })
         );
-        this.resultList.filter(item => item.checked === "false");
+        this.resultList.filter(item => item.checked === "[false]");
       } else if (this.form == "Completed Tasks") {
         this.resultList.filter(item => item.checked === "true");
       } else if (this.form == "All Tasks") {
@@ -123,6 +125,7 @@ export default {
       formData: {
         content: "",
         type: 0,
+        checked: []
       },
       typeList: [
         {
@@ -139,8 +142,8 @@ export default {
         }
       ],
       resultList: [],
+      
       form: "All Tasks",
-      checked: [],
       filmList: [
         {
           value: "Incomplete Tasks",
