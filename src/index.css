@@ -46,21 +46,8 @@
   align-items: center;
   margin: 100px 0 0 0;
 }
-.content .text .input {
-  width: 40%;
-  height: 50px;
-  border-radius: 10px;
-  border: 1px solid #6f6f6f;
-  outline: none;
-  padding-left: 30px;
-}
-.content .text .add {
-  width: 60px;
-  height: 32px;
-  margin: 0 10px;
-}
 .content .text .select {
-  width: 100px;
+  width: 180px;
   height: 30px;
 }
 .content .text .choice {
@@ -133,4 +120,7 @@
 }
 .ivu-menu-light:after {
   height: 0px !important;
+}
+.ivu-menu {
+  width: auto !important;
 }

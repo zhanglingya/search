@@ -2,7 +2,7 @@
   <div class="containter">
     <Layout>
       <Header class="header">
-        <p class="nav-left">{{title}}</p>
+        <p class="nav-left">语音合成中台系统</p>
         <div class="picture"></div>
         <p class="name">XXX</p>
       </Header>
@@ -10,20 +10,17 @@
         <Sider hide-trigger class="sider">
           <Menu active-name="2-1" :open-names="['2']">
             <MenuItem name="1">
-              <Icon type="ios-paper" />
-              {{first}}
+              <Icon type="ios-paper" />首页
             </MenuItem>
             <Submenu name="2">
               <template slot="title">
-                <Icon type="ios-paper" />
-                {{second}}
+                <Icon type="ios-paper" />账号管理
               </template>
-              <MenuItem name="2-1">{{secondOne}}</MenuItem>
-              <MenuItem name="2-2">{{secondTwo}}</MenuItem>
+              <MenuItem name="2-1">账号管理</MenuItem>
+              <MenuItem name="2-2">角色管理</MenuItem>
             </Submenu>
             <MenuItem name="3">
-              <Icon type="ios-paper" />
-              {{third}}
+              <Icon type="ios-paper" />账号管理
             </MenuItem>
           </Menu>
         </Sider>
@@ -31,20 +28,21 @@
           <Content class="content">
             <p class="title">todos</p>
             <div class="text">
-              <input
-                type="text"
+              <Input
+                v-model="formData.content"
                 placeholder="What do you want to watch?"
                 size="large"
-                class="input"
-                id="text"
-                autocomplete="off"
               />
-              <RadioGroup v-model="sc" class="choice">
-                <Radio label="comedy" class="type">comedy</Radio>
-                <Radio label="action" class="type">action</Radio>
-                <Radio label="crux" class="type">crux</Radio>
+              <RadioGroup v-model="formData.type">
+                <Radio
+                  v-for="type in typeList"
+                  :key="type.value"
+                  :label="type.value"
+                >{{ type.label }}</Radio>
               </RadioGroup>
-              <Button type="default" class="add" id="add" @click="addClick">add</Button>
+
+              <Button type="default" @click="addClick">add</Button>
+
               <Select v-model="form" class="select" id="sel" @on-change="choose">
                 <Option
                   v-for="item in filmList"
@@ -53,22 +51,29 @@
                 >{{ item.label }}</Option>
               </Select>
             </div>
-            <div class="message">
-              <Row type="flex" id="list">
-                <div class="col-comedy">
-                  <i-col span="4" class="col">comedy</i-col>
-                  <ul id="happy"></ul>
+
+            <Row type="flex" id="list">
+              <i-col span="8">
+                <h1>comedy</h1>
+                <div v-for="(item, index) in type0List" :key="index">
+                  <Checkbox v-model="formData.checked" :key = "formData.checked">{{ item.content }}</Checkbox>
                 </div>
-                <div class="col-action">
-                  <i-col span="4" class="col">action</i-col>
-                  <ul id="fast"></ul>
+              </i-col>
+
+              <i-col span="8">
+                <h1>action</h1>
+                <div v-for="(item, index) in type1List" :key="index">
+                  <Checkbox v-model="formData.checked">{{ item.content }}</Checkbox>
                 </div>
-                <div class="col-crux">
-                  <i-col span="4" class="col">crux</i-col>
-                  <ul id="scared"></ul>
+              </i-col>
+
+              <i-col span="8">
+                <h1>crux</h1>
+                <div v-for="(item, index) in type2List" :key="index">
+                  <Checkbox v-model="formData.checked">{{ item.content }}</Checkbox>
                 </div>
-              </Row>
-            </div>
+              </i-col>
+            </Row>
           </Content>
         </Layout>
       </Layout>
@@ -78,107 +83,91 @@
 
 <script>
 export default {
-  props: {
-    title: {
-      default: "语音合成中台系统"
-    },
-    first: {
-      default: "首页"
-    },
-    second: {
-      default: "账号管理"
-    },
-    third: {
-      default: "CRUD"
-    },
-    secondOne: {
-      default: "账号管理"
-    },
-    secondTwo: {
-      default: "角色管理"
-    }
-  },
   methods: {
     addClick: function() {
-      var text = document.getElementById("text").value;
       var patt = /^[\s]*$/;
-      var pvalue = patt.test(text);
-      if (text == "" || text == null || pvalue == true) {
+      var pvalue = patt.test(this.formData.content);
+      if (
+        this.formData.content == "" ||
+        this.formData.content == null ||
+        pvalue == true
+      ) {
         return false;
       } else {
-        //添加li标签
-        var line = document.createElement("li");
-
-        switch (this.sc) {
-          case "comedy":
-            var list = document.getElementById("happy");
-            break;
-          case "action":
-            list = document.getElementById("fast");
-            break;
-          case "crux":
-            list = document.getElementById("scared");
-            break;
-        }
-
-        line.innerHTML = text;
-        list.appendChild(line);
-
-        //往新的li标签添加复选框
-        var input = document.createElement("input");
-        input.type = "checkbox";
-        list.lastChild.appendChild(input);
-
-        //添加删除按钮
-        var butt = document.createElement("p");
-        butt.appendChild(document.createTextNode("x"));
-        list.lastChild.appendChild(butt);
-        butt.onclick = function() {
-          butt.parentNode.parentNode.removeChild(butt.parentNode);
-        };
-
-        document.getElementById("text").value = "";
+        this.resultList.push({
+          content: this.formData.content,
+          type: this.formData.type,
+          checked: this.formData.checked
+        });
       }
+      this.formData.content = "";
     },
     choose: function() {
-      switch (this.form) {
-        case "comedy":
-          document.getElementById("happy").style.display = "block";
-          document.getElementById("fast").style.display = "none";
-          document.getElementById("scared").style.display = "none";
-          break;
-        case "action":
-          document.getElementById("fast").style.display = "block";
-          document.getElementById("happy").style.display = "none";
-          document.getElementById("scared").style.display = "none";
-          break;
-        case "crux":
-          document.getElementById("scared").style.display = "block";
-          document.getElementById("happy").style.display = "none";
-          document.getElementById("fast").style.display = "none";
-          break;
+      if (this.form == "Incomplete Tasks") {
+        console.log(this.formData.checked);
+        console.log(
+          this.resultList.filter(function(item) {
+            return item.checked === true;
+          })
+        );
+        this.resultList.filter(item => item.checked === "false");
+      } else if (this.form == "Completed Tasks") {
+        this.resultList.filter(item => item.checked === "true");
+      } else if (this.form == "All Tasks") {
+        this.resultList.filter(item => item.checked === "true");
       }
     }
   },
   data() {
     return {
-      sc: "",
-      form: "action",
-      filmList: [
+      formData: {
+        content: "",
+        type: 0,
+        checked: ""
+      },
+      typeList: [
         {
-          value: "comedy",
+          value: 0,
           label: "comedy"
         },
         {
-          value: "action",
+          value: 1,
           label: "action"
         },
         {
-          value: "crux",
+          value: 2,
           label: "crux"
+        }
+      ],
+      resultList: [],
+      form: "All Tasks",
+      filmList: [
+        {
+          value: "Incomplete Tasks",
+          label: "Incomplete Tasks"
+        },
+        {
+          value: "Completed Tasks",
+          label: "Completed Tasks"
+        },
+        {
+          value: "All Tasks",
+          label: "All Tasks"
         }
       ]
     };
+  },
+
+  computed: {
+    type0List() {
+      return this.resultList.filter(item => item.type === 0);
+    },
+    type1List() {
+      return this.resultList.filter(item => item.type === 1);
+    },
+    type2List() {
+      return this.resultList.filter(item => item.type === 2);
+    }
   }
 };
 </script>
