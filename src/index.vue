@@ -56,21 +56,21 @@
               <i-col span="8">
                 <h1>comedy</h1>
                 <div v-for="(item, index) in type0List" :key="index">
-                  <Checkbox v-model="formData.checked" :key = "formData.checked">{{ item.content }}</Checkbox>
+                  <Checkbox v-model="checked" :label ="item.content">{{ item.content }}</Checkbox>
                 </div>
               </i-col>
 
               <i-col span="8">
                 <h1>action</h1>
                 <div v-for="(item, index) in type1List" :key="index">
-                  <Checkbox v-model="formData.checked">{{ item.content }}</Checkbox>
+                  <Checkbox v-model="checked" :label ="item.content">{{ item.content }}</Checkbox>
                 </div>
               </i-col>
 
               <i-col span="8">
                 <h1>crux</h1>
                 <div v-for="(item, index) in type2List" :key="index">
-                  <Checkbox v-model="formData.checked">{{ item.content }}</Checkbox>
+                  <Checkbox v-model="checked" :label ="item.content">{{ item.content }}</Checkbox>
                 </div>
               </i-col>
             </Row>
@@ -123,7 +123,6 @@ export default {
       formData: {
         content: "",
         type: 0,
-        checked: ""
       },
       typeList: [
         {
@@ -141,6 +140,7 @@ export default {
       ],
       resultList: [],
       form: "All Tasks",
+      checked: [],
       filmList: [
         {
           value: "Incomplete Tasks",
