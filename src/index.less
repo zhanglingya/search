@@ -92,18 +92,15 @@
   }
 }
 
+.list-item {
+  transition: all 1s;
+  display: inline-block;
+}
 .list-enter-active{
   animation: fade-in .5s;
 }
 .list-leave-active {
-  transform: scale(0);
-  transform-origin:30% 0;
-  transition: all 0.3s ease-out ;
-  
-}
-
-.list-enter-to{
-  transition: all 2s;
+  animation: fade-out .5s; 
 }
 
 @keyframes fade-in {
@@ -116,3 +113,13 @@
     transform-origin:30% 0;
   }
 }  
+@keyframes fade-out {
+  from{
+    transform: scale(1);
+    transform-origin:30% 0;
+  }
+ to {
+    transform: scale(0);
+    transform-origin:30% 0;
+  }
+} 

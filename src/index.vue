@@ -43,37 +43,37 @@
               <Button type="default" @click="addClick">add</Button>
               <Select v-model="choice">
                 <Option
-                  v-for="(item,index) in filmList"
+                  v-for="item in filmList"
                   :value="item.value"
-                  :key="index"
+                  :key="item.value"
                 >{{ item.label }}</Option>
               </Select>
             </div>
             <Row type="flex" id="list">
               <i-col span="8">
                 <h1>comedy</h1>
-                <transition-group name="list" mode="out-in">
-                <div v-for="(item, index) in type0List" :key="index">
-                  <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
-                </div>
+                <transition-group name="list" mode="in-out">
+                  <div v-for="item in type0List" :key="item.id">
+                    <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
+                  </div>
                 </transition-group>
               </i-col>
 
               <i-col span="8">
                 <h1>action</h1>
-                <transition-group name="list" mode="out-in">
-                <div v-for="(item, index) in type1List" :key="index">
-                  <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
-                </div>
+                <transition-group name="list" mode="in-out">
+                  <div v-for="item in type1List" :key="item.id">
+                    <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
+                  </div>
                 </transition-group>
               </i-col>
 
               <i-col span="8">
                 <h1>crux</h1>
-                <transition-group name="list" mode="out-in">
-                <div v-for="(item, index) in type2List" :key="index">
-                  <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
-                </div>
+                <transition-group name="list" mode="in-out">
+                  <div v-for="item in type2List" :key="item.id">
+                    <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
+                  </div>
                 </transition-group>
               </i-col>
             </Row>
@@ -100,7 +100,8 @@ export default {
         this.resultList.push({
           content: this.formData.content,
           type: this.formData.type,
-          check: false
+          check: false,
+          id:this.id++
         });
       }
       this.formData.content = "";
@@ -127,6 +128,7 @@ export default {
         }
       ],
       resultList: [],
+      id:0,
       choice: 0,
       filmList: [
         {
