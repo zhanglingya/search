@@ -27,7 +27,6 @@
         <Layout>
           <Content class="content">
             <p class="title">todos</p>
-
             <div class="text">
               <Input
                 v-model="formData.content"
@@ -42,35 +41,33 @@
                 >{{ type.label }}</Radio>
               </RadioGroup>
               <Button type="default" @click="addClick">add</Button>
-
-              <Select v-model="form" @on-change="choose">
+              <Select v-model="choice">
                 <Option
-                  v-for="item in filmList"
+                  v-for="(item,index) in filmList"
                   :value="item.value"
-                  :key="item.value"
+                  :key="index"
                 >{{ item.label }}</Option>
               </Select>
             </div>
-
             <Row type="flex" id="list">
               <i-col span="8">
                 <h1>comedy</h1>
                 <div v-for="(item, index) in type0List" :key="index">
-                  <Checkbox name="formData.checked" value="item.content">{{ item.content }}</Checkbox>
+                  <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
                 </div>
               </i-col>
 
               <i-col span="8">
                 <h1>action</h1>
                 <div v-for="(item, index) in type1List" :key="index">
-                  <Checkbox name="formData.checked" value="item.content">{{ item.content }}</Checkbox>
+                  <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
                 </div>
               </i-col>
 
               <i-col span="8">
                 <h1>crux</h1>
                 <div v-for="(item, index) in type2List" :key="index">
-                  <Checkbox name="formData.checked" value="item.content">{{ item.content }}</Checkbox>
+                  <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
                 </div>
               </i-col>
             </Row>
@@ -97,35 +94,17 @@ export default {
         this.resultList.push({
           content: this.formData.content,
           type: this.formData.type,
-          checked: this.formData.checked
+          check: false
         });
       }
       this.formData.content = "";
-    },
-    choose: function() {
-      if (this.form == "Incomplete Tasks") {
-        var index = 0;
-        console.log(this.formData.checked);
-
-        console.log(
-          this.resultList.filter(function(item,index,checked) {
-            return (index >= 0)
-          })
-        );
-        this.resultList.filter(item => item.checked === "[false]");
-      } else if (this.form == "Completed Tasks") {
-        this.resultList.filter(item => item.checked === "true");
-      } else if (this.form == "All Tasks") {
-        this.resultList.filter(item => item.checked === "true");
-      }
     }
   },
   data() {
     return {
       formData: {
         content: "",
-        type: 0,
-        checked: []
+        type: 0
       },
       typeList: [
         {
@@ -142,19 +121,18 @@ export default {
         }
       ],
       resultList: [],
-      
-      form: "All Tasks",
+      choice: 0,
       filmList: [
         {
-          value: "Incomplete Tasks",
+          value: 2,
           label: "Incomplete Tasks"
         },
         {
-          value: "Completed Tasks",
+          value: 1,
           label: "Completed Tasks"
         },
         {
-          value: "All Tasks",
+          value: 0,
           label: "All Tasks"
         }
       ]
@@ -163,13 +141,24 @@ export default {
 
   computed: {
     type0List() {
-      return this.resultList.filter(item => item.type === 0);
+      return this.filteredList.filter(item => item.type === 0);
     },
     type1List() {
-      return this.resultList.filter(item => item.type === 1);
+      return this.filteredList.filter(item => item.type === 1);
     },
     type2List() {
-      return this.resultList.filter(item => item.type === 2);
+      return this.filteredList.filter(item => item.type === 2);
+    },
+    filteredList() {
+      return this.resultList.filter(item => {
+        if (this.choice === 0) {
+          return true;
+        } else if (this.choice === 1) {
+          return item.check;
+        } else {
+          return !item.check;
+        }
+      });
     }
   }
 };

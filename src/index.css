@@ -30,6 +30,12 @@
 .sider li {
   width: 200px;
 }
+.sider .ivu-menu-light:after {
+  height: 0px !important;
+}
+.sider .ivu-menu {
+  width: auto !important;
+}
 .content {
   background-color: #ffffff;
   text-align: center;
@@ -37,50 +43,48 @@
 }
 .content .title {
   font-size: 50px;
-  margin: 50px 0 -50px 0;
+  margin: 50px 0 0 0;
 }
 .content .text {
   display: flex;
   align-items: center;
-  margin: 100px 20px 0 20px;
+  margin: 50px 20px 0 20px;
 }
 .content .text .ivu-radio-group {
-  width: 600px;
+  width: 280px;
 }
 .content .text .ivu-select {
-  width: 180px;
-}
-.content .text .select {
-  width: 180px;
-  height: 30px;
+  width: 150px;
 }
 .content .text button {
   margin: 10px;
 }
-.content .text .choice {
-  display: flex;
-  width: 250px;
-  justify-content: space-around;
+.content .text .ivu-input-wrapper {
+  width: 800px;
 }
-.content .text .choice .type {
-  font-size: 15px;
-  color: black;
-}
-.content .text .choice a :hover {
-  color: #baec2f;
-}
-.content .text ::-webkit-input-placeholder {
+.content .text .ivu-input-wrapper ::-webkit-input-placeholder {
   font-size: 20px;
   color: #c8c8c8;
   font-weight: 100;
 }
-.content .ivu-checkbox-wrapper {
+.content .text .ivu-input-wrapper .ivu-input {
+  padding-left: 50px;
+  outline: none;
+}
+.ivu-row-flex {
+  height: 1000px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+}
+.ivu-row-flex .ivu-checkbox-wrapper {
+  width: 200px;
+  height: 50px;
   font-size: 18px;
   color: black;
-}
-.ivu-menu-light:after {
-  height: 0px !important;
-}
-.ivu-menu {
-  width: auto !important;
+  background: #ffffff;
+  margin-bottom: 10px;
+  border-radius: 7px;
+  line-height: 50px;
 }
