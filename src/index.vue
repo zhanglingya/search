@@ -52,23 +52,29 @@
             <Row type="flex" id="list">
               <i-col span="8">
                 <h1>comedy</h1>
+                <transition-group name="list" mode="out-in">
                 <div v-for="(item, index) in type0List" :key="index">
                   <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
                 </div>
+                </transition-group>
               </i-col>
 
               <i-col span="8">
                 <h1>action</h1>
+                <transition-group name="list" mode="out-in">
                 <div v-for="(item, index) in type1List" :key="index">
                   <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
                 </div>
+                </transition-group>
               </i-col>
 
               <i-col span="8">
                 <h1>crux</h1>
+                <transition-group name="list" mode="out-in">
                 <div v-for="(item, index) in type2List" :key="index">
                   <Checkbox v-model="item.check">{{ item.content }}</Checkbox>
                 </div>
+                </transition-group>
               </i-col>
             </Row>
           </Content>
